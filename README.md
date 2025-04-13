@@ -111,9 +111,7 @@ O microserviço recebe um JSON com os dados do pedido, conforme o exemplo abaixo
 
 | Método | Rota                    | Descrição                            |
 |--------|-------------------------|--------------------------------------|
-| POST   | `/orders`               | Cria um novo pedido                  |
-| GET    | `/orders?cliente=2`     | Retorna todos os pedidos do cliente |
-| GET    | `/orders/total?cliente=2` | Retorna o total dos pedidos do cliente |
+| GET   | `/customers/{costumer_id}/orders`    | Adiciona os pedidos e já retorna os calculos e total   |
 
 ---
 
