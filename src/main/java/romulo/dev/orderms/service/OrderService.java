@@ -3,12 +3,15 @@ package romulo.dev.orderms.service;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import romulo.dev.orderms.dto.OrderCreatedEvent;
 import romulo.dev.orderms.entity.OrderEntity;
 import romulo.dev.orderms.entity.OrderItem;
 import romulo.dev.orderms.repository.OrderRepository;
+import romulo.dev.orderms.controller.dto.OrderResponse;
 
 @Service
 public class OrderService {
@@ -28,6 +31,14 @@ public class OrderService {
 		entity.setItems(getOrderItems(event));
 		entity.setTotal(getTotal(event));
 		orderRepository.save(entity);
+	}
+	
+	public Page<OrderResponse> findAllByCostumerId(Long customerId, PageRequest pageRequest){
+		
+		
+		var orders = orderRepository.findAllByCustomerId(customerId, pageRequest);
+		
+		return orders.map(OrderResponse::fromEntity);
 	}
 	
 	private BigDecimal getTotal(OrderCreatedEvent event) {
